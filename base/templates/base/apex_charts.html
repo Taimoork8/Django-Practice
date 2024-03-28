@@ -1,0 +1,421 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Basic Bar</h4>
+                    <div class="ct-chart ct-perfect-fourth" id="bar_basic_chart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Bar Grouped</h4>
+                    <div id="rickshaw-time-scale"></div>
+                    <div class="ct-chart ct-perfect-fourth" id="bar_Grouped_chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Stack Bar</h4>
+                    <div class="ct-chart ct-perfect-fourth" id="bar_stack_chart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"> Custom DataLabels</h4>
+                    <div class="ct-chart ct-perfect-fourth" id="custom_dataLabels_chart"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Custom Angle Circle</h4>
+                    <div class="ct-chart ct-perfect-fourth" id="custom_angle_circle"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"> Custom DataLabels</h4>
+                    <div class="ct-chart ct-perfect-fourth" id="custom_dataLabels_chart"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        {#var options = {#}
+        {#    series: [{#}
+        {#        data: [400, 690, 1100, 1380]#}
+        {#    }],#}
+        {#    chart: {#}
+        {#        type: 'bar',#}
+        {#        height: 350,#}
+        {#        toolbar: false,#}
+        {##}
+        {#    },#}
+        {#    plotOptions: {#}
+        {#        bar: {#}
+        {#            distributed: true,#}
+        {#            horizontal: true,#}
+        {#        }#}
+        {#    },#}
+        {#    legend: {#}
+        {#        show: false#}
+        {#    },#}
+        {#    colors: ['#13d8aa', '#546E7A', '#d4526e', '#33b2df'],#}
+        {#    dataLabels: {#}
+        {#        enabled: false#}
+        {#    },#}
+        {##}
+        {#    xaxis: {#}
+        {#        categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands'#}
+        {#        ],#}
+        {#    },#}
+        {##}
+        {# }#}
+        {##}
+        {#var chart = new ApexCharts(document.querySelector("#bar_basic_chart"), options);#}
+        {#chart.render();#}
+
+
+        var options = {
+            series: [{
+                data: generateRandomData(4)
+            }],
+            chart: {
+                type: 'bar',
+                height: 350,
+                toolbar: false,
+            },
+            plotOptions: {
+                bar: {
+                    distributed: true,
+                    horizontal: true,
+                }
+            },
+            legend: {
+                show: false
+            },
+            colors: ['#13d8aa', '#546E7A', '#d4526e', '#33b2df'],
+            dataLabels: {
+                enabled: false
+            },
+            xaxis: {
+                categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands'],
+            },
+        };
+
+        var chart = new ApexCharts(document.querySelector("#bar_basic_chart"), options);
+        chart.render();
+
+        // Function to generate random data
+        function generateRandomData(count) {
+            var data = [];
+            for (var i = 0; i < count; i++) {
+                data.push(Math.floor(Math.random() * 2000));
+            }
+            return data;
+        }
+
+        // Function to update chart with new random data
+        function updateChartWithRandomData() {
+            var newData = generateRandomData(4);
+            chart.updateSeries([{data: newData}]);
+        }
+
+        // Update the chart every 20 seconds
+        setInterval(function () {
+            updateChartWithRandomData();
+        }, 20000);
+
+
+        var options1 = {
+            series: [{
+                data: [44, 55, 41, 64, 22, 43, 21],
+                color: '#00E396'
+            }, {
+                data: [53, 32, 33, 52, 13, 44, 32],
+                color: '#FEB019'
+            }],
+            chart: {
+                type: 'bar',
+                height: 430,
+                toolbar: false,
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    dataLabels: {
+                        position: 'top',
+                    },
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                offsetX: -6,
+                style: {
+                    fontSize: '12px',
+                    colors: ['#fff']
+                }
+            },
+            legend: {
+                show: false
+            },
+            stroke: {
+                show: true,
+                width: 1,
+                colors: ['#fff']
+            },
+            tooltip: {
+                shared: true,
+                intersect: false
+            },
+            xaxis: {
+                categories: [2001, 2002, 2003, 2004, 2005, 2006, 2007],
+            },
+            yaxis: {
+                labels: {
+                    show: true
+                }
+            },
+        };
+
+        var chart1 = new ApexCharts(document.querySelector("#bar_Grouped_chart"), options1);
+        chart1.render();
+
+        var options2 = {
+            series: [{
+                name: 'Marine Sprite',
+                data: [44, 55, 41, 37, 22, 43, 21]
+            }, {
+                name: 'Striking Calf',
+                data: [0, 0, 0, 0, 0, 0, 32]
+            }, {
+                name: 'Tank Picture',
+                data: [0, 0, 0, 0, 0, 0, 20]
+            }, {
+                name: 'Bucket Slope',
+                data: [0, 0, 0, 0, 0, 0, 4]
+            }, {
+                name: 'Reborn Kid',
+                data: [0, 0, 0, 0, 0, 0, 20]
+            }],
+            chart: {
+                type: 'bar',
+                height: 350,
+                stacked: true,
+                toolbar: false,
+
+            },
+            legend: {
+                show: false
+            },
+
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    dataLabels: {
+                        total: {
+                            enabled: true,
+                            offsetX: 0,
+                            style: {
+                                fontSize: '13px',
+                                fontWeight: 600
+                            },
+                            formatter: function (val) {
+                                return val + " total"
+                            }
+                        }
+                    }
+                },
+            },
+            xaxis: {
+                categories: [2008, 2009, 2010, 2011, 2012, 2013, 2014],
+                labels: {
+                    show: true,
+                    rotate: -45,
+                    rotateAlways: false,
+                    hideOverlappingLabels: true,
+                    showDuplicates: false,
+                    trim: false,
+                    minHeight: undefined,
+                    maxHeight: 120,
+                    style: {
+                        fontSize: '12px',
+                        fontFamily: 'Helvetica, Arial, sans-serif',
+                        fontWeight: 700,
+                        cssClass: 'apexcharts-xaxis-label',
+                    },
+                    formatter: function (val) {
+                        return val + "%"
+                    }
+                }
+            },
+
+            yaxis: {
+                labels: {
+                    show: false
+                }
+            },
+        };
+
+        var chart2 = new ApexCharts(document.querySelector("#bar_stack_chart"), options2);
+        chart2.render();
+
+        var options3 = {
+            series: [{
+                data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+            }],
+            chart: {
+                type: 'bar',
+                height: 380,
+                toolbar: false,
+            },
+            plotOptions: {
+                bar: {
+                    barHeight: '100%',
+                    distributed: true,
+                    horizontal: true,
+                    dataLabels: {
+                        position: 'bottom'
+                    },
+                }
+            },
+            colors: ['#33b2df', '#546E7A', '#d4526e', '#13d8aa', '#A5978B', '#2b908f', '#f9a3a4', '#90ee7e',
+                '#f48024', '#69d2e7'
+            ],
+
+            legend: {
+                show: false
+            },
+            dataLabels: {
+                enabled: true,
+                textAnchor: 'start',
+                style: {
+                    colors: ['#fff']
+                },
+                formatter: function (val, opt) {
+                    return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val
+                },
+                offsetX: 0,
+                dropShadow: {
+                    enabled: true
+                }
+            },
+            stroke: {
+                width: 1,
+                colors: ['#fff']
+            },
+            xaxis: {
+                categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
+                    'United States', 'China', 'India'
+                ],
+            },
+            yaxis: {
+                labels: {
+                    show: false
+                }
+            },
+            {#title: {#}
+            {#    text: 'Custom DataLabels',#}
+            {#    align: 'center',#}
+            {#    floating: true#}
+            {# },#}
+            {#subtitle: {#}
+            {#    text: 'Category Names as DataLabels inside bars',#}
+            {#    align: 'center',#}
+            {# },#}
+            {#tooltip: {#}
+            {#    theme: 'dark',#}
+            {#    x: {#}
+            {#        show: false#}
+            {#    },#}
+            {#    y: {#}
+            {#        title: {#}
+            {#            formatter: function () {#}
+            {#                return ''#}
+            {#            }#}
+            {#        }#}
+            {#    }#}
+            {# } #}
+        };
+
+        var chart3 = new ApexCharts(document.querySelector("#custom_dataLabels_chart"), options3);
+        chart3.render();
+
+
+        const options4 = {
+            series: [76, 67, 61, 90],
+
+            chart: {
+                type: 'radialBar',
+                height: 375,
+            },
+            plotOptions: {
+                radialBar: {
+                    offsetY: 0,
+                    startAngle: 0,
+                    endAngle: 270,
+                    borderRadius: 8,
+                    horizontal: true,
+                    distributed: true,
+                    {#barHeight: 20,#}
+                    dataLabels: {position: 'bottom', /* use 'bottom' for left and 'top' for right align(textAnchor) */}
+                }
+            }
+            , dataLabels: {
+                offsetX: 2,
+                name: {
+                    show: true
+                },
+                value: {
+                    show: false,
+                },
+
+                style: {
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    align: 'center',
+
+                }
+            },
+            legend: {
+                show: true,
+                position: 'left',
+                labels: {
+                    useSeriesColors: true,
+                    formatter: function (seriesName, opts) {
+                        return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
+                    },
+                },
+            },
+            colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
+            labels: ['Vimeo', 'Messenger', 'Facebook', 'LinkedIn'],
+            grid: {
+                xaxis: {lines: {show: true}},
+                yaxis: {lines: {show: false}},
+                strokeDashArray: 4
+            },
+            tooltip: {style: {fontSize: '12px'},}
+        }
+        var chart4 = new ApexCharts(document.querySelector("#custom_angle_circle"), options4);
+        chart4.render();
+    </script>
+{% endblock %}
